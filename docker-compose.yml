@@ -1,0 +1,56 @@
+version: "3.5"
+
+services:
+  frontend_server:
+    image: frontend
+    build: ./frontend
+    ports:
+      - 5000:5000
+    environment:
+      - REACT_APP_BACKEND_URL=http://localhost:8080
+    container_name: frontend
+
+  backend_server:
+    image: backend
+    build: ./backend
+    ports:
+      - 8080:8080
+    environment:
+      - REDIS_HOST=redis_server
+      - POSTGRES_HOST=postgres_server
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DATABASE=postgres
+      - REQUEST_ORIGIN=http://localhost
+
+    container_name: backend
+    depends_on:
+      - postgres_server
+      - redis_server
+
+  redis_server:
+    image: redis
+    restart: unless-stopped
+    container_name: redis
+
+  postgres_server:
+    image: postgres:13.2-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: postgres
+    container_name: postgres
+    volumes:
+      - database:/var/lib/postgresql/data
+
+  reverse_proxy:
+    image: nginx:1.19-alpine
+    restart: unless-stopped
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+    environment:
+      - NGINX_PORT=80
+
+volumes:
+  database:
