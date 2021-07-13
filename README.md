@@ -46,4 +46,4 @@ See the project diagram for understanding the app architecture.
 
 ## Complete Project Screenshot
 
-![Project Diagram](./app-screenshots/complete-project.png)
+![Project Diagram](https://github.com/faayam/fullstack-docker-project/blob/main/app-screeshots/complete-project.png)
