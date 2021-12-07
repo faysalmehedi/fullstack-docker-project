@@ -43,6 +43,10 @@ See the project diagram for understanding the app architecture.
 - Ex-2.6: connected to a postgres database to save messages. postgreql starts as docker container and configured to docker-compose file.
 - Ex-2.8: Add Nginx which will function as a reverse proxy (see the image above). The requests arriving at anything other than /api will be redirected to frontend container and /api will get redirected to backend container.
 - Ex-2.9-2.10: Complete all configurations on docker-compose so that the app start when "docker-compose up" command given and all services are accesible.
+- Ex-3.3: For security reasons, removed the root access and make sure the containers start their processes as a non-root user.
+- Ex-3.4-3.5: Optimize the size of the images
+- Ex-3.6: Multi-stage build for the backend app
+
 
 ## Complete Project Screenshot
 
